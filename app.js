@@ -8,6 +8,10 @@ dotenv.config();
 const port = process.env.PORT || 3000;
 const app = express();
 app.use(bodyParser.json());
+app.all("*", (req, res, next) => {
+  console.log(req.url + " - " + req.method);
+  next();
+});
 app.use("/api/v1/users", usersRoutes);
 const listen = async (app, port) => {
   try {
